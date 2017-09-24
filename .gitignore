@@ -1,0 +1,11 @@
+/vendor
+!/vendor/.keep
+/glide.lock
+/debug
+/.idea
+/.env
+/tmp
+!/tmp/.keep
+/log
+!/log/.keep
+.DS_Store

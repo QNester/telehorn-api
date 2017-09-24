@@ -1,0 +1,49 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres-telehorn
+    environment:
+      POSTGRES_PASSWORD: docker
+      POSTGRES_USER: docker
+      POSTGRES_DB: telehorn
+    expose:
+      - "5432"
+    ports:
+      - "5433:5432"
+
+  app:
+    build: .
+    container_name: telehorn-api
+    expose:
+      - "3001"
+#      - "3000"
+    ports:
+      - "3001:3001"
+#      - "3000:3000"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    volumes:
+      - ./api:/go/src/telehorn/api
+      - ./config:/go/src/telehorn/config
+      - ./routing.go:/go/src/telehorn/routing.go
+      - ./server.go:/go/src/telehorn/server.go
+      - ./.env.docker:/go/src/telehorn/.env
+    tty: true
+    stdin_open: true
+    command: fresh -c fresh.conf
+
+  # Flyway
+  flyway:
+    build:
+      context: .
+      dockerfile: ./db/Dockerfile
+    container_name: flyway-telehorn
+    volumes:
+      - ./db/migrations:/db/migrations:ro
+    links:
+      - postgres
+    depends_on:
+      - postgres
