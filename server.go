@@ -7,6 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattes/migrate/database/postgres"
 	_ "github.com/mattes/migrate/source/github"
+	"os"
+	"log"
 )
 
 func main() {
