@@ -58,3 +58,7 @@ func environment() string {
 func port() string {
 	return envKey("APP_PORT")
 }
+
+func BotKey() string {
+	return envKey("BOT_KEY")
+}

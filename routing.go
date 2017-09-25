@@ -13,6 +13,7 @@ func InitRouting(router *gin.Engine) {
 	router.GET("/ping", hello())
 	router.GET("/check_db", checkDb())
 	router.POST("/subscribes", api.CreateSubscribeHandler())
+	router.POST("/notify", api.CreateNotificationHandler())
 }
 
 func hello() gin.HandlerFunc {
