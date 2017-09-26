@@ -30,7 +30,10 @@ services:
       - ./config:/go/src/telehorn/config
       - ./routing.go:/go/src/telehorn/routing.go
       - ./server.go:/go/src/telehorn/server.go
+      - ./server_bot.go:/go/src/telehorn/server_bot.go
       - ./.env.docker:/go/src/telehorn/.env
+      - ./fresh.conf:/go/src/telehorn/fresh.conf
+      - ./log:/go/src/telehorn/log
     tty: true
     stdin_open: true
     command: fresh -c fresh.conf

@@ -30,7 +30,7 @@ func Get() Config {
 func setUp() {
 	confStruct := Config{
 		port(),
-		environment(),
+		Environment(),
 	}
 	configInstance = confStruct
 }
@@ -44,17 +44,21 @@ func envKey(key string) string {
 	return os.Getenv(key)
 }
 
-// IsProduction - Return true if environment is production
+// IsProduction - Return true if Environment is production
 func (c Config) IsProduction() bool {
 	return c.Environment == "production"
 }
 
-// return current environment
-func environment() string {
+// return current Environment
+func Environment() string {
 	return envKey("APP_ENVIRONMENT")
 }
 
 // return current port
 func port() string {
 	return envKey("APP_PORT")
+}
+
+func BotKey() string {
+	return envKey("BOT_KEY")
 }

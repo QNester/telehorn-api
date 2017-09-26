@@ -4,19 +4,28 @@ import (
 	"fmt"
 	"telehorn/config"
 
-	"github.com/gin-gonic/gin"
 	_ "github.com/mattes/migrate/database/postgres"
 	_ "github.com/mattes/migrate/source/github"
-	"os"
-	"log"
+	"github.com/gin-gonic/gin"
 )
+
+func init() {
+	config.InitLog("api")
+}
 
 func main() {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
 	InitRouting(router)
-	router.Run(appPort()) // listen and serve on 0.0.0.0:8080
+
+	// -- Async start bot
+	go func() {
+		StartBot()
+	}()
+
+	// -- And start API
+	router.Run(appPort()) // listen and serve on 0.0.0.0:appPort
 }
 
 func appPort() string {
