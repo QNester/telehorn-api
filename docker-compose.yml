@@ -25,6 +25,7 @@ services:
       - postgres
     depends_on:
       - postgres
+      - flyway
     volumes:
       - ./api:/go/src/telehorn/api
       - ./config:/go/src/telehorn/config
