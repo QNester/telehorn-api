@@ -7,7 +7,7 @@ COPY . /go/src/telehorn
 WORKDIR /go/src/telehorn
 
 COPY .env.docker .env
-COPY glide* .
+COPY glide* ./
 
 # Install glide #
 RUN curl https://glide.sh/get | sh
