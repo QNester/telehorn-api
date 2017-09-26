@@ -4,8 +4,8 @@
 
 -- +migrate Up
 
--- [Table] subscribers --
-CREATE TABLE subscribers (
+-- [Table]  --
+CREATE TABLE  (
   id           SERIAL       NOT NULL PRIMARY KEY,
   user_id      INTEGER      NOT NULL,
   chat_id      INTEGER      NOT NULL UNIQUE,
@@ -48,17 +48,17 @@ VALUES (
 
 -- [Table] notifications - registrate notifications --
 CREATE TABLE notifications (
-  id            SERIAL       NOT NULL PRIMARY KEY,
-  subscribe_id  INTEGER       NOT NULL PRIMARY KEY,
-  type_id       INTEGER      NOT NULL,
-  title         VARCHAR(255) NOT NULL,
-  text          VARCHAR(255),
-  tags          VARCHAR(255),
-  FOREIGN KEY (subscribe_id) REFERENCES subscribers (id),
+  id           SERIAL       NOT NULL PRIMARY KEY,
+  subscribe_id INTEGER      NOT NULL PRIMARY KEY,
+  type_id      INTEGER      NOT NULL,
+  title        VARCHAR(255) NOT NULL,
+  text         VARCHAR(255),
+  tags         VARCHAR(255),
+  FOREIGN KEY (subscribe_id) REFERENCES  (id),
   FOREIGN KEY (type_id) REFERENCES notification_types (id)
 );
 
 -- +migrate Down
--- DROP TABLE subscribers CASCADE;
+-- DROP TABLE  CASCADE;
 -- DROP TABLE notification_types CASCADE;
 -- DROP TABLE notifications CASCADE;

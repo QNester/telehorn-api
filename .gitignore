@@ -6,6 +6,7 @@
 /.env
 /tmp
 !/tmp/.keep
-/log
-!/log/.keep
+/log/*log
+
 .DS_Store
+

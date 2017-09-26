@@ -2,11 +2,12 @@ package api
 
 import (
 	db_supp "telehorn/db"
-	"github.com/gin-gonic/gin"
+	//"github.com/gin-gonic/gin"
 	"log"
 	"fmt"
 	"crypto/rand"
 	"time"
+	"github.com/gin-gonic/gin"
 )
 
 // Struct JSON for creation subscribe
@@ -30,7 +31,7 @@ func CreateSubscribeHandler() gin.HandlerFunc {
 		var creationJson CreateJSON
 		c.BindJSON(&creationJson)
 
-		createdSubscribe := createSubscribe(c, creationJson)
+		createdSubscribe := CreateSubscribe(c, creationJson)
 
 		c.JSON(201, gin.H{
 			"user_id": createdSubscribe.UserID,
@@ -47,7 +48,7 @@ func randomToken() string {
 	return fmt.Sprintf("%x", b)
 }
 
-func createSubscribe(c *gin.Context, creationJSON CreateJSON) Subscribe{
+func CreateSubscribe(c *gin.Context, creationJSON CreateJSON) Subscribe{
 	db, err := db_supp.OpenConnect()
 	defer db.Close()
 	if err != nil {
